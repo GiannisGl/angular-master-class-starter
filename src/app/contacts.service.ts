@@ -29,4 +29,8 @@ export class ContactsService {
   getContact(id: number): Observable<Contact> {
     return this.http.get<ContactResponse>(`${this.apiUrl}/${this.CONTACTS_ENDPOINT}/${id}`).pipe(map(data => data.item));
   }
+
+  updateContact(contact: Contact): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${this.CONTACTS_ENDPOINT}/${contact.id}`, contact);
+  }
 }
