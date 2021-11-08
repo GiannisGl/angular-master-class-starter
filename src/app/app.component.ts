@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Contact} from './models/contact';
+import {CONTACT_DATA} from './data/contact-data';
+import {ContactsService} from './contacts.service';
 
 @Component({
   selector: 'trm-contacts-app',
@@ -6,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class ContactsAppComponent {
-  title = 'Angular Master Class';
+  constructor() {}
 }
