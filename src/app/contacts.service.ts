@@ -30,7 +30,7 @@ export class ContactsService {
     return this.http.get<ContactResponse>(`${this.apiUrl}/${this.CONTACTS_ENDPOINT}/${id}`).pipe(map(data => data.item));
   }
 
-  updateContact(contact: Contact): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${this.CONTACTS_ENDPOINT}/${contact.id}`, contact);
+  updateContact(contact: Contact): Observable<Contact> {
+    return this.http.put<ContactResponse>(`${this.apiUrl}/${this.CONTACTS_ENDPOINT}/${contact.id}`, contact).pipe(map(data => data.item));
   }
 }

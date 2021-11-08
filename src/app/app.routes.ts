@@ -4,8 +4,8 @@ import {ContactsDetailComponent} from './contacts-detail/contacts-detail.compone
 import {ContactsEditorComponent} from './contacts-editor/contacts-editor.component';
 
 export const APP_ROUTES: Route[] = [
-  {path: '', pathMatch: 'full', redirectTo: 'list'},
   {path: 'list', component: ContactsListComponent},
   {path: 'contact/:id', component: ContactsDetailComponent},
   {path: 'contact/:id/edit', component: ContactsEditorComponent},
+  {path: '**', pathMatch: 'full', redirectTo: 'list'},
 ];
