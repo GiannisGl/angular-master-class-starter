@@ -1,15 +1,32 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {Contact} from './models/contact';
-import {CONTACT_DATA} from './data/contact-data';
+import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {API_ENDPOINT} from './app.tokens';
+
+interface ContactResponse {
+  item: Contact;
+}
+
+interface ContactsResponse {
+  items: Contact[];
+}
+
 
 @Injectable()
 export class ContactsService {
 
-  getContacts(): Contact[] {
-    return CONTACT_DATA;
+  readonly CONTACTS_ENDPOINT = 'contacts';
+
+  constructor(private http: HttpClient, @Inject(API_ENDPOINT) private apiUrl: string) {
   }
 
-  getContact(id: number): Contact {
-    return this.getContacts().find(contact => contact.id === id);
+  getContacts(): Observable<Contact[]> {
+    return this.http.get<ContactsResponse>(`${this.apiUrl}/${this.CONTACTS_ENDPOINT}`).pipe(map(data => data.items));
+  }
+
+  getContact(id: number): Observable<Contact> {
+    return this.http.get<ContactResponse>(`${this.apiUrl}/${this.CONTACTS_ENDPOINT}/${id}`).pipe(map(data => data.item));
   }
 }

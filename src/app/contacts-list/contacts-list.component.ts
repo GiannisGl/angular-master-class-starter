@@ -7,10 +7,14 @@ import {ContactsService} from '../contacts.service';
   templateUrl: './contacts-list.component.html',
   styleUrls: ['./contacts-list.component.scss']
 })
-export class ContactsListComponent {
-  contacts: Contact[] = this.contactsService.getContacts();
+export class ContactsListComponent implements OnInit{
+  contacts: Contact[];
 
   constructor(private contactsService: ContactsService) {
+  }
+
+  ngOnInit(): void {
+    this.contactsService.getContacts().subscribe((contacts: Contact[]) => this.contacts = contacts);
   }
 
   trackById(index: number, contact: Contact): string | number {
