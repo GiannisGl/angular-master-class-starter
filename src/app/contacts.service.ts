@@ -8,4 +8,8 @@ export class ContactsService {
   getContacts(): Contact[] {
     return CONTACT_DATA;
   }
+
+  getContact(id: number): Contact {
+    return this.getContacts().find(contact => contact.id === id);
+  }
 }
