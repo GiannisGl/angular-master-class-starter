@@ -3,6 +3,7 @@ import {Contact} from '../models/contact';
 import {ContactsService} from '../contacts.service';
 import {merge, Observable, Subject} from 'rxjs';
 import {debounceTime, delay, distinctUntilChanged, switchMap, takeUntil} from 'rxjs/operators';
+import {EventBusService, TITLE_CHANGE_EVENT_TYPE} from '../event-bus.service';
 
 @Component({
   selector: 'trm-contacts-list',
@@ -13,7 +14,8 @@ export class ContactsListComponent implements OnInit {
   contacts$: Observable<Contact[]>;
   private terms$: Subject<string> = new Subject<string>();
 
-  constructor(private contactsService: ContactsService) {
+  constructor(private contactsService: ContactsService, eventBusService: EventBusService) {
+    eventBusService.emit(TITLE_CHANGE_EVENT_TYPE, 'Contacts');
   }
 
   ngOnInit(): void {
