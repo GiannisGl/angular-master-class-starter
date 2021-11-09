@@ -26,7 +26,6 @@ export class ContactsListComponent implements OnInit {
 
     const allContacts$ = this.contactsService.getContacts()
       .pipe(
-        delay(5000),
         takeUntil(searchContacts$)
       );
 
