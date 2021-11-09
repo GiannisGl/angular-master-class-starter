@@ -17,4 +17,8 @@ export class ContactsListComponent {
   trackById(index: number, contact: Contact): string | number {
     return contact.id;
   }
+
+  search(term: any): void {
+    this.contacts$ = this.contactsService.search(term);
+  }
 }

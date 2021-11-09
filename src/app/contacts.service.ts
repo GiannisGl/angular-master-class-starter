@@ -33,4 +33,8 @@ export class ContactsService {
   updateContact(contact: Contact): Observable<Contact> {
     return this.http.put<ContactResponse>(`${this.apiUrl}/${this.CONTACTS_ENDPOINT}/${contact.id}`, contact).pipe(map(data => data.item));
   }
+
+  search(term: string): Observable<Contact[]> {
+    return this.http.get<ContactsResponse>(`${this.apiUrl}/search?text=${term}`).pipe(map(data => data.items));
+  }
 }

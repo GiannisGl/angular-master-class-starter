@@ -1,3 +1,9 @@
+<mat-toolbar>
+  <mat-form-field color="accent" class="trm-search-container">
+    <input matInput type="text" (input)="search($event.target.value)">
+  </mat-form-field>
+  <mat-icon color="accent">search</mat-icon>
+</mat-toolbar>
 <mat-nav-list>
   <a mat-list-item *ngFor="let contact of (contacts$ | async); trackBy:trackById"
   [routerLink]="['/contact', contact.id]">
