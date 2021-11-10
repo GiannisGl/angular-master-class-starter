@@ -15,8 +15,11 @@
               <div *ngIf="name.errors.minlength">Min length is {{name.errors.minlength['requiredLength']}}, actual length is {{name.errors.minlength['actualLength']}}</div>
             </mat-hint>
           </mat-form-field>
-          <mat-form-field fxFlex>
-            <input matInput placeholder="Email" name="email" ngModel>
+          <mat-form-field fxFlex [color]="email.errors ? 'warn' : 'primary'">
+            <input matInput placeholder="Email" name="email" ngModel #email="ngModel" trmEmailValidator>
+            <mat-hint align="end" *ngIf="!email.valid && !email.pristine">
+              Invalid email
+            </mat-hint>
           </mat-form-field>
           <mat-form-field fxFlex>
             <input matInput placeholder="Birthday" name="birthday" type="date" ngModel>
