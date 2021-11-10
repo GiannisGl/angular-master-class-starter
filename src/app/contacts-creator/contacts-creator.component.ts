@@ -3,7 +3,7 @@ import {Contact} from '../models/contact';
 import {ContactsService} from '../contacts.service';
 import {CONTACTS_UPDATED_EVENT_TYPE, EventBusService} from '../event-bus.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Form, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Form, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {checkEmailAvailability} from '../email-availability-validator.directive';
 import {validateEmail} from '../email-validator.directive';
 
@@ -15,6 +15,7 @@ import {validateEmail} from '../email-validator.directive';
 export class ContactsCreatorComponent implements OnInit {
 
   form: FormGroup;
+  phoneFormArray = this.formBuilder.array([this.formBuilder.control('')]);
 
   constructor(private contactsService: ContactsService,
               private route: ActivatedRoute,
@@ -27,7 +28,7 @@ export class ContactsCreatorComponent implements OnInit {
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
       email: this.formBuilder.control('', validateEmail, checkEmailAvailability(this.contactsService)),
       birthday: '',
-      phone: '',
+      phone: this.phoneFormArray,
       website: '',
       gender: '',
       address: this.formBuilder.group({
@@ -48,5 +49,13 @@ export class ContactsCreatorComponent implements OnInit {
 
   close(): Promise<boolean> {
     return this.router.navigate(['../'], {relativeTo: this.route});
+  }
+
+  addPhoneField(): void {
+    this.phoneFormArray.push(this.formBuilder.control(''));
+  }
+
+  removePhoneField(i: number) {
+    this.phoneFormArray.removeAt(i);
   }
 }
