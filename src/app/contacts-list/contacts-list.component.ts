@@ -14,7 +14,8 @@ export class ContactsListComponent implements OnInit {
   contacts$: Observable<Contact[]>;
   private terms$: Subject<string> = new Subject<string>();
 
-  constructor(private contactsService: ContactsService) {
+  constructor(private contactsService: ContactsService, eventBusService: EventBusService) {
+    eventBusService.emit(TITLE_CHANGE_EVENT_TYPE, '');
   }
 
   ngOnInit(): void {

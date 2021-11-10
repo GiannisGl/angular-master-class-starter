@@ -5,6 +5,7 @@ import {ContactsDashboardComponent} from './contacts-dashboard/contacts-dashboar
 import {AboutComponent} from './about/about.component';
 import {CAN_DEACTIVATE_GUARD} from './app.tokens';
 import {ContactsResolver} from './shared/contacts.resolver';
+import {AboutModule} from './about/about.module';
 
 export const APP_ROUTES: Route[] = [
   {
@@ -27,6 +28,6 @@ export const APP_ROUTES: Route[] = [
         }},
     ]
   },
-  {path: 'about', component: AboutComponent},
+  {path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule)},
   {path: '**', pathMatch: 'full', redirectTo: 'contacts'},
 ];

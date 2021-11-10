@@ -31,8 +31,7 @@ import {ContactsResolver} from './shared/contacts.resolver';
     ContactsDetailViewComponent,
     TabsComponent,
     TabComponent,
-    ContactsDashboardComponent,
-    AboutComponent
+    ContactsDashboardComponent
   ],
   imports: [
     BrowserModule,
