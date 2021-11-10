@@ -3,6 +3,7 @@ import {ContactsEditorComponent} from './contacts-editor/contacts-editor.compone
 import {ContactsDetailViewComponent} from './contacts-detail-view/contacts-detail-view.component';
 import {ContactsDashboardComponent} from './contacts-dashboard/contacts-dashboard.component';
 import {AboutComponent} from './about/about.component';
+import {CAN_DEACTIVATE_GUARD} from './app.tokens';
 
 export const APP_ROUTES: Route[] = [
   {
@@ -10,7 +11,7 @@ export const APP_ROUTES: Route[] = [
     component: ContactsDashboardComponent,
     children: [
       {path: ':id', component: ContactsDetailViewComponent},
-      {path: ':id/edit', component: ContactsEditorComponent},
+      {path: ':id/edit', component: ContactsEditorComponent, canDeactivate: [CAN_DEACTIVATE_GUARD]},
     ]
   },
   {path: 'about', component: AboutComponent},

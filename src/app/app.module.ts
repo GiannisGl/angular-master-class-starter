@@ -11,7 +11,7 @@ import {RouterModule} from '@angular/router';
 import {APP_ROUTES} from './app.routes';
 import {ContactsDetailComponent} from './contacts-detail/contacts-detail.component';
 import {HttpClientModule} from '@angular/common/http';
-import {API_ENDPOINT} from './app.tokens';
+import {API_ENDPOINT, CAN_DEACTIVATE_GUARD} from './app.tokens';
 import {ContactsEditorComponent} from './contacts-editor/contacts-editor.component';
 import {FormsModule} from '@angular/forms';
 import {ContactsDetailViewComponent} from './contacts-detail-view/contacts-detail-view.component';
@@ -45,10 +45,16 @@ import { AboutComponent } from './about/about.component';
   providers: [
     ContactsService,
     EventBusService,
-    {provide: API_ENDPOINT, useValue: 'http://localhost:4201/api'}
+    {provide: API_ENDPOINT, useValue: 'http://localhost:4201/api'},
+    {provide: CAN_DEACTIVATE_GUARD, useValue: confirmNavigationGuard}
   ],
   bootstrap: [ContactsAppComponent]
 })
 export class ContactsModule {
 
+}
+
+// Needs to be an exported function for AOT to work
+export function confirmNavigationGuard(component): boolean {
+  return !component.warnOnClosing || window.confirm('Navigate away without saving?');
 }

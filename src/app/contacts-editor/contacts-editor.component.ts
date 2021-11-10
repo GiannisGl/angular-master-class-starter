@@ -14,6 +14,7 @@ import {map, switchMap, tap} from 'rxjs/operators';
 export class ContactsEditorComponent implements OnInit {
 
   contact$: Observable<Contact>;
+  warnOnClosing = true;
 
   constructor(private route: ActivatedRoute,
               private contactsService: ContactsService,
@@ -32,6 +33,7 @@ export class ContactsEditorComponent implements OnInit {
 
   save(contact: Contact): void {
     this.contact$ = this.contactsService.updateContact(contact);
+    this.warnOnClosing = false;
   }
 
   cancel(): Promise<boolean> {
