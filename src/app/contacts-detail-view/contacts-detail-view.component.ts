@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {Contact} from '../models/contact';
 import {ContactsService} from '../contacts.service';
 import {EventBusService, TITLE_CHANGE_EVENT_TYPE} from '../event-bus.service';
-import {tap} from 'rxjs/operators';
+import {map, switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'trm-contacts-detail-view',
@@ -23,16 +23,19 @@ export class ContactsDetailViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.params['id'];
-    this.contact$ = this.contactsService.getContact(id).pipe(
-      tap(contact => this.eventBusService.emit(TITLE_CHANGE_EVENT_TYPE, 'Contact Details: ' + contact.name)));
+    this.contact$ = this.route.paramMap.pipe(
+      map(paramMap => paramMap.get('id')),
+      switchMap(id => this.contactsService.getContact(id)),
+      tap(contact => this.eventBusService.emit(TITLE_CHANGE_EVENT_TYPE, contact.name))
+    );
   }
 
   navigateToEditor(contact: Contact) {
-    return this.router.navigate(['contact', contact.id, 'edit']);
+    return this.router.navigate(['contacts', contact.id, 'edit']);
   }
 
   navigateToList() {
-    return this.router.navigate(['list']);
+    this.eventBusService.emit(TITLE_CHANGE_EVENT_TYPE, '');
+    return this.router.navigate(['']);
   }
 }

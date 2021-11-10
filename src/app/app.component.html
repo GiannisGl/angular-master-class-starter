@@ -1,2 +1,11 @@
-<mat-toolbar color="primary">{{ title$ | async}}</mat-toolbar>
+<mat-toolbar color="primary">
+  <div fxLayout fxLayoutAlign="space-between center" fxFlex>
+    Contacts
+    <div> {{ title$ | async}} </div>
+    <a mat-button title="Go to about page" class="right"
+       routerLink="/about">
+      About
+    </a>
+  </div>
+</mat-toolbar>
 <router-outlet></router-outlet>

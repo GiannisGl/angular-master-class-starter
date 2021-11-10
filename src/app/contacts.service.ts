@@ -26,7 +26,7 @@ export class ContactsService {
     return this.http.get<ContactsResponse>(`${this.apiUrl}/${this.CONTACTS_ENDPOINT}`).pipe(map(data => data.items));
   }
 
-  getContact(id: number): Observable<Contact> {
+  getContact(id: string): Observable<Contact> {
     return this.http.get<ContactResponse>(`${this.apiUrl}/${this.CONTACTS_ENDPOINT}/${id}`).pipe(map(data => data.item));
   }
 

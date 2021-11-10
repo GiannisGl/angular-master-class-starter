@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Contact} from '../models/contact';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'trm-contacts-detail',
@@ -7,7 +8,7 @@ import {Contact} from '../models/contact';
   styleUrls: ['./contacts-detail.component.scss']
 })
 export class ContactsDetailComponent {
-  @Input() contact: Contact;
+  @Input() contact$: Observable<Contact>;
   @Output() edit: EventEmitter<Contact> = new EventEmitter<Contact>();
-  @Output() back: EventEmitter<void> = new EventEmitter<void>();
+  @Output() close: EventEmitter<void> = new EventEmitter<void>();
 }

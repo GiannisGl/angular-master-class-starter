@@ -1,5 +1,5 @@
 <div class="trm-contacts-detail">
-  <mat-card *ngIf="contact">
+  <mat-card *ngIf="contact$ | async as contact">
     <mat-card-title-group class="fullBleed">
       <img mat-card-md-image [src]="contact.image">
       <mat-card-title>{{contact.name}}</mat-card-title>
@@ -22,7 +22,7 @@
       </dl>
     </mat-card-content>
     <mat-card-actions fxLayout fxLayoutAlign="center center">
-      <a mat-button title="Go back to list" (click)="back.emit()">Go Back</a>
+      <a mat-button title="close" (click)="close.emit()">Close</a>
       <a mat-button title="edit" (click)="edit.emit(contact)">Edit</a>
     </mat-card-actions>
   </mat-card>

@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ContactsService} from '../contacts.service';
 import {Observable} from 'rxjs';
 import {EventBusService, TITLE_CHANGE_EVENT_TYPE} from '../event-bus.service';
-import {tap} from 'rxjs/operators';
+import {map, switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'trm-contacts-editor',
@@ -23,9 +23,11 @@ export class ContactsEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.params['id'];
-    this.contact$ = this.contactsService.getContact(id).pipe(
-      tap(contact => this.eventBusService.emit(TITLE_CHANGE_EVENT_TYPE, 'Editing Contact details: ' + contact.name)));
+    this.contact$ = this.route.paramMap.pipe(
+      map(paramMap => paramMap.get('id')),
+      switchMap(id => this.contactsService.getContact(id)),
+      tap(contact => this.eventBusService.emit(TITLE_CHANGE_EVENT_TYPE, 'Editing: ' + contact.name))
+    );
   }
 
   save(contact: Contact): void {
