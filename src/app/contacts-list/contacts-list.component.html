@@ -9,5 +9,9 @@
   [routerLink]="['/contacts', contact.id]">
     <img mat-list-avatar [src]="contact.image" alt="Picture of {{contact.name}}">
     <h3 mat-line>{{contact.name}}</h3>
+    <button mat-mini-fab (click)="delete(contact)"><mat-icon>delete</mat-icon></button>
+  </a>
+  <a routerLink="/contacts/new" mat-fab title="Add a new contact" class="trm-floating-button">
+    <mat-icon class="md-24">add</mat-icon>
   </a>
 </mat-nav-list>

@@ -37,4 +37,12 @@ export class ContactsService {
   search(term: string): Observable<Contact[]> {
     return this.http.get<ContactsResponse>(`${this.apiUrl}/search?text=${term}`).pipe(map(data => data.items));
   }
+
+  addContact(contact: Contact): Observable<Contact> {
+    return this.http.post<ContactResponse>(`${this.apiUrl}/${this.CONTACTS_ENDPOINT}`, contact).pipe(map(data => data.item));
+  }
+
+  deleteContact(contact: Contact): Observable<Contact> {
+    return this.http.delete<ContactResponse>(`${this.apiUrl}/${this.CONTACTS_ENDPOINT}/${contact.id}`).pipe(map(data => data.item));
+  }
 }

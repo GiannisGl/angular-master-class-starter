@@ -8,6 +8,7 @@ interface EventBusArgs {
 }
 
 export const TITLE_CHANGE_EVENT_TYPE = 'appTitleChange';
+export const CONTACTS_UPDATED_EVENT_TYPE = 'appTitleChange';
 
 @Injectable()
 export class EventBusService {

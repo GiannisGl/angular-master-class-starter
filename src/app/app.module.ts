@@ -21,6 +21,7 @@ import {EventBusService} from './event-bus.service';
 import { ContactsDashboardComponent } from './contacts-dashboard/contacts-dashboard.component';
 import { AboutComponent } from './about/about.component';
 import {ContactsResolver} from './shared/contacts.resolver';
+import { ContactsCreatorComponent } from './contacts-creator/contacts-creator.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {ContactsResolver} from './shared/contacts.resolver';
     ContactsDetailViewComponent,
     TabsComponent,
     TabComponent,
-    ContactsDashboardComponent
+    ContactsDashboardComponent,
+    ContactsCreatorComponent
   ],
   imports: [
     BrowserModule,

@@ -6,12 +6,17 @@ import {AboutComponent} from './about/about.component';
 import {CAN_DEACTIVATE_GUARD} from './app.tokens';
 import {ContactsResolver} from './shared/contacts.resolver';
 import {AboutModule} from './about/about.module';
+import {ContactsCreatorComponent} from './contacts-creator/contacts-creator.component';
 
 export const APP_ROUTES: Route[] = [
   {
     path: 'contacts',
     component: ContactsDashboardComponent,
     children: [
+      {
+        path: 'new',
+        component: ContactsCreatorComponent,
+      },
       {
         path: ':id',
         component: ContactsDetailViewComponent,
@@ -25,7 +30,8 @@ export const APP_ROUTES: Route[] = [
         canDeactivate: [CAN_DEACTIVATE_GUARD],
         resolve: {
           contact: ContactsResolver
-        }},
+        }
+      },
     ]
   },
   {path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule)},

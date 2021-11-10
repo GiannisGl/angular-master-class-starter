@@ -3,7 +3,7 @@ import {Contact} from '../models/contact';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ContactsService} from '../contacts.service';
 import {Observable} from 'rxjs';
-import {EventBusService, TITLE_CHANGE_EVENT_TYPE} from '../event-bus.service';
+import {CONTACTS_UPDATED_EVENT_TYPE, EventBusService, TITLE_CHANGE_EVENT_TYPE} from '../event-bus.service';
 import {map, switchMap, tap} from 'rxjs/operators';
 
 @Component({
@@ -32,8 +32,10 @@ export class ContactsEditorComponent implements OnInit {
   }
 
   save(contact: Contact): void {
-    this.contact$ = this.contactsService.updateContact(contact);
-    this.warnOnClosing = false;
+    this.contact$ = this.contactsService.updateContact(contact).pipe(
+      tap(() => this.eventBusService.emit(CONTACTS_UPDATED_EVENT_TYPE, '')),
+      tap(() => this.warnOnClosing = false)
+    );
   }
 
   cancel(): Promise<boolean> {
