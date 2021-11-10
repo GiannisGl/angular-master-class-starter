@@ -1,5 +1,5 @@
 <div class="trm-contacts-creator">
-  <form #form="ngForm" (ngSubmit)="save(form.value)">
+  <form #form="ngForm" (ngSubmit)="save(form.value)" novalidate>
     <mat-card>
       <mat-card-title-group>
         <img mat-card-md-image alt="Placeholder image" src="/assets/images/placeholder.png">
@@ -8,8 +8,12 @@
       </mat-card-title-group>
       <mat-card-content>
         <div fxLayout="column">
-          <mat-form-field fxFlex>
-            <input matInput placeholder="Name" name="name" ngModel>
+          <mat-form-field fxFlex [color]="name.errors ? 'warn' : 'primary'">
+            <input matInput placeholder="Name" name="name" ngModel #name="ngModel" required minlength="3">
+            <mat-hint align="end" *ngIf="!name.valid && !name.pristine">
+              <div *ngIf="name.errors.required">Name is required</div>
+              <div *ngIf="name.errors.minlength">Min length is {{name.errors.minlength['requiredLength']}}, actual length is {{name.errors.minlength['actualLength']}}</div>
+            </mat-hint>
           </mat-form-field>
           <mat-form-field fxFlex>
             <input matInput placeholder="Email" name="email" ngModel>
@@ -46,7 +50,7 @@
         </div>
       </mat-card-content>
       <mat-card-actions fxLayout fxLayoutAlign="center center">
-        <button mat-button type="submit">Save</button>
+        <button mat-button type="submit" [disabled]="!form.valid">Save</button>
         <a mat-button title="Cancel creating new contact" (click)="close()">Cancel</a>
       </mat-card-actions>
     </mat-card>
