@@ -67,21 +67,9 @@
               INSERT_GENDER_VARIANT
             </mat-radio-button>
           </mat-radio-group>
-          <fieldset fxLayout="column" formGroupName="address">
-            <legend>Address</legend>
-            <mat-form-field fxFlex>
-              <input matInput placeholder="Street" formControlName="street">
-            </mat-form-field>
-            <mat-form-field fxFlex>
-              <input matInput placeholder="Zip" formControlName="zip">
-            </mat-form-field>
-            <mat-form-field fxFlex>
-              <input matInput placeholder="City" formControlName="city">
-            </mat-form-field>
-            <mat-select placeholder="Country" formControlName="country">
-              <mat-option>INSER_COUNTRY_NAME</mat-option>
-            </mat-select>
-          </fieldset>
+
+          <trm-address-input formControlName="address"></trm-address-input>
+
         </div>
       </mat-card-content>
       <mat-card-actions fxLayout fxLayoutAlign="center center">

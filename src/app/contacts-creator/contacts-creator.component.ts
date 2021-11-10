@@ -3,7 +3,7 @@ import {Contact} from '../models/contact';
 import {ContactsService} from '../contacts.service';
 import {CONTACTS_UPDATED_EVENT_TYPE, EventBusService} from '../event-bus.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Form, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {checkEmailAvailability} from '../email-availability-validator.directive';
 import {validateEmail} from '../email-validator.directive';
 
@@ -15,7 +15,7 @@ import {validateEmail} from '../email-validator.directive';
 export class ContactsCreatorComponent implements OnInit {
 
   form: FormGroup;
-  phoneFormArray = this.formBuilder.array([this.formBuilder.control('')]);
+  phoneFormArray = this.formBuilder.array(['']);
 
   constructor(private contactsService: ContactsService,
               private route: ActivatedRoute,
@@ -31,7 +31,7 @@ export class ContactsCreatorComponent implements OnInit {
       phone: this.phoneFormArray,
       website: '',
       gender: '',
-      address: this.formBuilder.group({
+      address: this.formBuilder.control({
         street: '',
         zip: '',
         city: '',
