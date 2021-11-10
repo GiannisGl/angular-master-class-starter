@@ -23,6 +23,7 @@ import { AboutComponent } from './about/about.component';
 import {ContactsResolver} from './shared/contacts.resolver';
 import { ContactsCreatorComponent } from './contacts-creator/contacts-creator.component';
 import { EmailValidatorDirective } from './email-validator.directive';
+import { EmailAvailabilityValidatorDirective } from './email-availability-validator.directive';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { EmailValidatorDirective } from './email-validator.directive';
     TabComponent,
     ContactsDashboardComponent,
     ContactsCreatorComponent,
-    EmailValidatorDirective
+    EmailValidatorDirective,
+    EmailAvailabilityValidatorDirective
   ],
   imports: [
     BrowserModule,

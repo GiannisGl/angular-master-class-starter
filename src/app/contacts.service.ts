@@ -13,7 +13,6 @@ interface ContactsResponse {
   items: Contact[];
 }
 
-
 @Injectable()
 export class ContactsService {
 
@@ -44,5 +43,9 @@ export class ContactsService {
 
   deleteContact(contact: Contact): Observable<Contact> {
     return this.http.delete<ContactResponse>(`${this.apiUrl}/${this.CONTACTS_ENDPOINT}/${contact.id}`).pipe(map(data => data.item));
+  }
+
+  isEmailAvailable(email: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/check-email?email=${email}`);
   }
 }

@@ -16,9 +16,10 @@
             </mat-hint>
           </mat-form-field>
           <mat-form-field fxFlex [color]="email.errors ? 'warn' : 'primary'">
-            <input matInput placeholder="Email" name="email" ngModel #email="ngModel" trmEmailValidator>
+            <input matInput placeholder="Email" name="email" ngModel #email="ngModel" trmEmailValidator trmCheckEmailAvailability>
             <mat-hint align="end" *ngIf="!email.valid && !email.pristine">
-              Invalid email
+              <div *ngIf="email.hasError('validateEmail')">Email is invalid</div>
+              <div *ngIf="email.hasError('emailTaken')">Email is taken</div>
             </mat-hint>
           </mat-form-field>
           <mat-form-field fxFlex>
