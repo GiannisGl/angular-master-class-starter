@@ -14,7 +14,7 @@ export class EmailValidatorDirective {
 }
 const VALID_EMAIL = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 
-function validateEmail(c: FormControl) {
+export function validateEmail(c: FormControl) {
   return VALID_EMAIL.test(c.value) || c.value === '' ? null : {
     validateEmail: {
       valid: false

@@ -27,7 +27,7 @@ export class EmailAvailabilityValidatorDirective implements AsyncValidator {
   }
 }
 
-function checkEmailAvailability(contactsService: ContactsService) {
+export function checkEmailAvailability(contactsService: ContactsService) {
   return (emailControl: FormControl) => {
     return contactsService.isEmailAvailable(emailControl.value).pipe(
       map(res => res.error ? {emailTaken: true} : null)

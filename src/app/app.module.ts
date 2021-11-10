@@ -13,7 +13,7 @@ import {ContactsDetailComponent} from './contacts-detail/contacts-detail.compone
 import {HttpClientModule} from '@angular/common/http';
 import {API_ENDPOINT, CAN_DEACTIVATE_GUARD} from './app.tokens';
 import {ContactsEditorComponent} from './contacts-editor/contacts-editor.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ContactsDetailViewComponent} from './contacts-detail-view/contacts-detail-view.component';
 import { TabsComponent } from './tabs/tabs/tabs.component';
 import { TabComponent } from './tabs/tab/tab.component';
@@ -46,7 +46,8 @@ import { EmailAvailabilityValidatorDirective } from './email-availability-valida
     FlexLayoutModule,
     RouterModule.forRoot(APP_ROUTES),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     ContactsService,
