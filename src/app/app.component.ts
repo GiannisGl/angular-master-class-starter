@@ -3,7 +3,8 @@ import {Contact} from './models/contact';
 import {CONTACT_DATA} from './data/contact-data';
 import {ContactsService} from './contacts.service';
 import {EventBusService, TITLE_CHANGE_EVENT_TYPE} from './event-bus.service';
-import {Observable} from 'rxjs';
+import {asapScheduler, Observable} from 'rxjs';
+import {observeOn} from 'rxjs/operators';
 
 @Component({
   selector: 'trm-contacts-app',
@@ -15,6 +16,6 @@ export class ContactsAppComponent {
   title$: Observable<string>;
 
   constructor(public eventBusService: EventBusService) {
-    this.title$ = eventBusService.observe(TITLE_CHANGE_EVENT_TYPE);
+    this.title$ = eventBusService.observe(TITLE_CHANGE_EVENT_TYPE).pipe(observeOn(asapScheduler));
   }
 }

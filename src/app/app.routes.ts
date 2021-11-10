@@ -4,14 +4,27 @@ import {ContactsDetailViewComponent} from './contacts-detail-view/contacts-detai
 import {ContactsDashboardComponent} from './contacts-dashboard/contacts-dashboard.component';
 import {AboutComponent} from './about/about.component';
 import {CAN_DEACTIVATE_GUARD} from './app.tokens';
+import {ContactsResolver} from './shared/contacts.resolver';
 
 export const APP_ROUTES: Route[] = [
   {
     path: 'contacts',
     component: ContactsDashboardComponent,
     children: [
-      {path: ':id', component: ContactsDetailViewComponent},
-      {path: ':id/edit', component: ContactsEditorComponent, canDeactivate: [CAN_DEACTIVATE_GUARD]},
+      {
+        path: ':id',
+        component: ContactsDetailViewComponent,
+        resolve: {
+          contact: ContactsResolver
+        }
+      },
+      {
+        path: ':id/edit',
+        component: ContactsEditorComponent,
+        canDeactivate: [CAN_DEACTIVATE_GUARD],
+        resolve: {
+          contact: ContactsResolver
+        }},
     ]
   },
   {path: 'about', component: AboutComponent},

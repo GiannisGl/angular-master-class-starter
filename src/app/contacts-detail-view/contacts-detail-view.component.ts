@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Contact} from '../models/contact';
 import {ContactsService} from '../contacts.service';
@@ -23,9 +23,8 @@ export class ContactsDetailViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.contact$ = this.route.paramMap.pipe(
-      map(paramMap => paramMap.get('id')),
-      switchMap(id => this.contactsService.getContact(id)),
+    this.contact$ = this.route.data.pipe(
+      map(data => data['contact']),
       tap(contact => this.eventBusService.emit(TITLE_CHANGE_EVENT_TYPE, contact.name))
     );
   }

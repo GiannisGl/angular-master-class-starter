@@ -20,6 +20,7 @@ import { TabComponent } from './tabs/tab/tab.component';
 import {EventBusService} from './event-bus.service';
 import { ContactsDashboardComponent } from './contacts-dashboard/contacts-dashboard.component';
 import { AboutComponent } from './about/about.component';
+import {ContactsResolver} from './shared/contacts.resolver';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { AboutComponent } from './about/about.component';
   providers: [
     ContactsService,
     EventBusService,
+    ContactsResolver,
     {provide: API_ENDPOINT, useValue: 'http://localhost:4201/api'},
     {provide: CAN_DEACTIVATE_GUARD, useValue: confirmNavigationGuard}
   ],
